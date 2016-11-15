@@ -2,4 +2,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="FieldInspection.FieldInspection" android:versionCode="1" android:versionName="1.0">
   <uses-sdk android:minSdkVersion="16" />
   <application android:label="FieldInspection"></application>
+  <application android:label="AppName" android:icon="@drawable/icon" android:theme="@style/MyTheme"></application> 
 </manifest>

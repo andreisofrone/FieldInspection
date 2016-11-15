@@ -4,7 +4,7 @@ using Android.OS;
 
 namespace FieldInspection
 {
-    [Activity(Label = "FieldInspection", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(  Label = "FieldInspection", Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)
