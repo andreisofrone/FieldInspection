@@ -59,12 +59,12 @@ namespace FieldInspection
 				case (Resource.Id.nav_home):
 					Toast.MakeText(this, "Home selected!", ToastLength.Short).Show();
 					break;
-				case (Resource.Id.nav_messages):
-					Toast.MakeText(this, "Message selected!", ToastLength.Short).Show();
-					break;
-				case (Resource.Id.nav_friends):
-					// React on 'Friends' selection
-					break;
+				//case (Resource.Id.nav_messages):
+				//	Toast.MakeText(this, "Message selected!", ToastLength.Short).Show();
+				//	break;
+				//case (Resource.Id.nav_friends):
+				//	// React on 'Friends' selection
+				//	break;
 			}
 			// Close drawer
 			drawerLayout.CloseDrawers();

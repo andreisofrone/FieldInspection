@@ -2299,17 +2299,11 @@ namespace FieldInspection
 			// aapt resource value: 0x7f090027
 			public const int multiply = 2131296295;
 			
-			// aapt resource value: 0x7f09008e
-			public const int nav_SearchApartment = 2131296398;
-			
-			// aapt resource value: 0x7f09008d
-			public const int nav_friends = 2131296397;
-			
 			// aapt resource value: 0x7f09008b
 			public const int nav_home = 2131296395;
 			
 			// aapt resource value: 0x7f09008c
-			public const int nav_messages = 2131296396;
+			public const int nav_inspection = 2131296396;
 			
 			// aapt resource value: 0x7f09007b
 			public const int nav_view = 2131296379;
