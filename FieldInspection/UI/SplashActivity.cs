@@ -13,6 +13,7 @@ namespace FieldInspection
 			base.OnCreate(bundle);
 			Thread.Sleep(2500);
 			StartActivity(typeof(MainActivity));
+			//TDOD Here
 		}
 	}
 }
