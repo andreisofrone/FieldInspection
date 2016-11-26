@@ -9,7 +9,7 @@ using Android.App;
 
 namespace FieldInspection
 {
-	[Activity(Label = "FieldInspection", Theme = "@style/MyTheme.Base", MainLauncher = true, Icon = "@drawable/icon")]
+	[Activity(Label = "FieldInspection", Theme = "@style/MyTheme.Base", Icon = "@drawable/icon")]
 	public class MainActivity : AppCompatActivity
 	{
 		DrawerLayout drawerLayout;

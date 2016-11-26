@@ -109,6 +109,7 @@
     <AndroidResource Include="Resources\layout\app_bar.axml" />
     <AndroidResource Include="Resources\layout\headerdrawerlayout.axml" />
     <AndroidResource Include="Resources\layout\homeLayout.axml" />
+    <AndroidResource Include="Resources\drawable\GreenSplash.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\strings.xml" />
