@@ -2,10 +2,15 @@
 using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
-using Android.Support.V7.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.App;
+using System.Threading.Tasks;
+using System.Net;
+using System;
+using System.IO;
+using System.Json;
+
 
 namespace FieldInspection
 {
@@ -16,8 +21,28 @@ namespace FieldInspection
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 
-			base.OnCreate(savedInstanceState);
+
 			SetContentView(Resource.Layout.Main);
+			Button button = FindViewById<Button>(Resource.Id.button);
+
+			// When the user clicks the button ...
+			button.Click += async (sender, e) =>
+			{
+
+				// Get the latitude and longitude entered by the user and create a query.
+				string url = "http://api.geonames.org/findNearByWeatherJSON?lat=" +
+							 "42.25" +
+							 "&lng=" +
+							 "26.7" +
+							 "&username=demo";
+
+				// Fetch the weather information asynchronously, 
+				// parse the results, then update the screen:
+				JsonValue json = await FetchWeatherAsync(url);
+				ParseAndDisplay (json);
+			};
+			base.OnCreate(savedInstanceState);
+
 			drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
 			// Init toolbar
@@ -45,6 +70,67 @@ namespace FieldInspection
 			ft.Add(Resource.Id.HomeFrameLayout, new HomeFragment());
 			ft.Commit();
 		}
+
+		private async Task<JsonValue> FetchWeatherAsync(string url)
+		{
+			// Create an HTTP web request using the URL:
+			HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
+			request.ContentType = "application/json";
+			request.Method = "GET";
+
+			// Send the request to the server and wait for the response:
+			using (WebResponse response = await request.GetResponseAsync())
+			{
+				// Get a stream representation of the HTTP web response:
+				using (Stream stream = response.GetResponseStream())
+				{
+					// Use this stream to build a JSON document object:
+					JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
+					Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
+
+					// Return the JSON document:
+					return jsonDoc;
+				}
+			}
+		}
+		private void ParseAndDisplay(JsonValue json)
+		{
+			// Get the weather reporting fields from the layout resource:
+			var location = "";
+			var temperature = "";
+			var humidity = "";
+			var conditions = "";
+
+			// Extract the array of name/value results for the field name "weatherObservation". 
+			JsonValue weatherResults = json["weatherObservation"];
+
+			// Extract the "stationName" (location string) and write it to the location TextBox:
+			location = weatherResults["stationName"];
+
+			// The temperature is expressed in Celsius:
+			double temp = weatherResults["temperature"];
+			// Convert it to Fahrenheit:
+			temp = ((9.0 / 5.0) * temp) + 32;
+			// Write the temperature (one decimal place) to the temperature TextBox:
+			temperature = String.Format("{0:F1}", temp) + "° F";
+
+			// Get the percent humidity and write it to the humidity TextBox:
+			double humidPercent = weatherResults["humidity"];
+			humidity = humidPercent.ToString() + "%";
+
+			// Get the "clouds" and "weatherConditions" strings and 
+			// combine them. Ignore strings that are reported as "n/a":
+			string cloudy = weatherResults["clouds"];
+			if (cloudy.Equals("n/a"))
+				cloudy = "";
+			string cond = weatherResults["weatherCondition"];
+			if (cond.Equals("n/a"))
+				cond = "";
+
+			// Write the result to the conditions TextBox:
+			conditions = cloudy + " " + cond;
+		}
+
 		//define custom title text
 		protected override void OnResume()
 		{
@@ -59,12 +145,12 @@ namespace FieldInspection
 				case (Resource.Id.nav_home):
 					Toast.MakeText(this, "Home selected!", ToastLength.Short).Show();
 					break;
-				//case (Resource.Id.nav_messages):
-				//	Toast.MakeText(this, "Message selected!", ToastLength.Short).Show();
-				//	break;
-				//case (Resource.Id.nav_friends):
-				//	// React on 'Friends' selection
-				//	break;
+					//case (Resource.Id.nav_messages):
+					//	Toast.MakeText(this, "Message selected!", ToastLength.Short).Show();
+					//	break;
+					//case (Resource.Id.nav_friends):
+					//	// React on 'Friends' selection
+					//	break;
 			}
 			// Close drawer
 			drawerLayout.CloseDrawers();
