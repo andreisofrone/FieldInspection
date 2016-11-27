@@ -21,6 +21,8 @@
             android:orientation="vertical">
             <include
                 layout="@layout/app_bar" />
+            <include
+                layout="@layout/homeLayout" />
             <FrameLayout
                 android:id="@+id/HomeFrameLayout"
                 android:minWidth="25px"

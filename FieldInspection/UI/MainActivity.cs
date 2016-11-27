@@ -10,6 +10,7 @@ using System.Net;
 using System;
 using System.IO;
 using System.Json;
+using Xamarin.Android;
 
 
 namespace FieldInspection
@@ -26,21 +27,21 @@ namespace FieldInspection
 			Button button = FindViewById<Button>(Resource.Id.button);
 
 			// When the user clicks the button ...
-			button.Click += async (sender, e) =>
-			{
+			//button.Click += async (sender, e) =>
+			//{
 
-				// Get the latitude and longitude entered by the user and create a query.
-				string url = "http://api.geonames.org/findNearByWeatherJSON?lat=" +
-							 "42.25" +
-							 "&lng=" +
-							 "26.7" +
-							 "&username=demo";
+			//	// Get the latitude and longitude entered by the user and create a query.
+			//	string url = "http://api.geonames.org/findNearByWeatherJSON?lat=" +
+			//				 "42.25" +
+			//				 "&lng=" +
+			//				 "26.7" +
+			//				 "&username=demo";
 
-				// Fetch the weather information asynchronously, 
-				// parse the results, then update the screen:
-				JsonValue json = await FetchWeatherAsync(url);
-				ParseAndDisplay (json);
-			};
+			//	// Fetch the weather information asynchronously, 
+			//	// parse the results, then update the screen:
+			//	//JsonValue json = await FetchWeatherAsync(url);
+			//	//ParseAndDisplay (json);
+			//};
 			base.OnCreate(savedInstanceState);
 
 			drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
@@ -102,7 +103,7 @@ namespace FieldInspection
 			var conditions = "";
 
 			// Extract the array of name/value results for the field name "weatherObservation". 
-			JsonValue weatherResults = json["weatherObservation"];
+			JsonValue weatherResults = json["status"];
 
 			// Extract the "stationName" (location string) and write it to the location TextBox:
 			location = weatherResults["stationName"];
@@ -129,6 +130,10 @@ namespace FieldInspection
 
 			// Write the result to the conditions TextBox:
 			conditions = cloudy + " " + cond;
+
+			Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
+			alert.SetTitle(location);
+			alert.SetMessage(temperature);
 		}
 
 		//define custom title text
