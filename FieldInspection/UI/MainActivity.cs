@@ -23,25 +23,7 @@ namespace FieldInspection
 		{
 
 
-			SetContentView(Resource.Layout.Main);
-			Button button = FindViewById<Button>(Resource.Id.button);
-
-			// When the user clicks the button ...
-			//button.Click += async (sender, e) =>
-			//{
-
-			//	// Get the latitude and longitude entered by the user and create a query.
-			//	string url = "http://api.geonames.org/findNearByWeatherJSON?lat=" +
-			//				 "42.25" +
-			//				 "&lng=" +
-			//				 "26.7" +
-			//				 "&username=demo";
-
-			//	// Fetch the weather information asynchronously, 
-			//	// parse the results, then update the screen:
-			//	//JsonValue json = await FetchWeatherAsync(url);
-			//	//ParseAndDisplay (json);
-			//};
+			SetContentView(Resource.Layout.Main);	
 			base.OnCreate(savedInstanceState);
 
 			drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
@@ -147,12 +129,12 @@ namespace FieldInspection
 		{
 			switch (e.MenuItem.ItemId)
 			{
-				case (Resource.Id.nav_home):
-					Toast.MakeText(this, "Home selected!", ToastLength.Short).Show();
+				case (Resource.Id.nav_dashboard):
+					Toast.MakeText(this, "Dashboard selected!", ToastLength.Short).Show();
 					break;
-					//case (Resource.Id.nav_messages):
-					//	Toast.MakeText(this, "Message selected!", ToastLength.Short).Show();
-					//	break;
+				case (Resource.Id.nav_inspection):
+						Toast.MakeText(this, "Inspection selected!", ToastLength.Short).Show();
+						break;
 					//case (Resource.Id.nav_friends):
 					//	// React on 'Friends' selection
 					//	break;
