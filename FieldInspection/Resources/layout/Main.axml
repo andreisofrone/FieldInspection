@@ -23,6 +23,8 @@
                 layout="@layout/app_bar" />
             <include
                 layout="@layout/homeLayout" />
+          <include
+                layout="@layout/dashboard" />
             <FrameLayout
                 android:id="@+id/HomeFrameLayout"
                 android:minWidth="25px"

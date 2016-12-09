@@ -2,22 +2,20 @@
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Views;
-using System.Json;
-
+using System;
+using System.Collections.Generic;
+using Android.App;
+using Android.Content;
+using Android.Content.PM;
+using Android.Graphics;
+using Android.OS;
+using Android.Provider;
+using Android.Widget;
+using Java.IO;
 
 namespace FieldInspection
-
 {
-    using System;
-    using System.Collections.Generic;
-    using Android.App;
-    using Android.Content;
-    using Android.Content.PM;
-    using Android.Graphics;
-    using Android.OS;
-    using Android.Provider;
-    using Android.Widget;
-    using Java.IO;
+    
     using Environment = Android.OS.Environment;
     using Uri = Android.Net.Uri;
 
@@ -56,7 +54,6 @@ namespace FieldInspection
                 _imageView.SetImageBitmap(App.bitmap);
                 App.bitmap = null;
             }
-
             // Dispose of the Java side bitmap.
             GC.Collect();
         }
@@ -81,10 +78,12 @@ namespace FieldInspection
 
 			// Create ActionBarDrawerToggle button and add it to the toolbar
 			var drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.open_drawer, Resource.String.close_drawer);
+
 			if (drawerToggle != null)
 			{
 				drawerLayout.SetDrawerListener(drawerToggle);
 			}
+
 			drawerToggle.SyncState();
 
 			//load default home screen
@@ -130,70 +129,6 @@ namespace FieldInspection
             return availableActivities != null && availableActivities.Count > 0;
         }
 
-  //      private async Task<JsonValue> FetchWeatherAsync(string url)
-		//{
-		//	// Create an HTTP web request using the URL:
-		//	HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
-		//	request.ContentType = "application/json";
-		//	request.Method = "GET";
-
-		//	// Send the request to the server and wait for the response:
-		//	using (WebResponse response = await request.GetResponseAsync())
-		//	{
-		//		// Get a stream representation of the HTTP web response:
-		//		using (Stream stream = response.GetResponseStream())
-		//		{
-		//			// Use this stream to build a JSON document object:
-		//			JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-		//			Console.Out.WriteLine("Response: {0}", jsonDoc.ToString());
-
-		//			// Return the JSON document:
-		//			return jsonDoc;
-		//		}
-		//	}
-		//}
-		private void ParseAndDisplay(JsonValue json)
-		{
-			// Get the weather reporting fields from the layout resource:
-			var location = "";
-			var temperature = "";
-			var humidity = "";
-			var conditions = "";
-
-			// Extract the array of name/value results for the field name "weatherObservation". 
-			JsonValue weatherResults = json["status"];
-
-			// Extract the "stationName" (location string) and write it to the location TextBox:
-			location = weatherResults["stationName"];
-
-			// The temperature is expressed in Celsius:
-			double temp = weatherResults["temperature"];
-			// Convert it to Fahrenheit:
-			temp = ((9.0 / 5.0) * temp) + 32;
-			// Write the temperature (one decimal place) to the temperature TextBox:
-			temperature = String.Format("{0:F1}", temp) + "° F";
-
-			// Get the percent humidity and write it to the humidity TextBox:
-			double humidPercent = weatherResults["humidity"];
-			humidity = humidPercent.ToString() + "%";
-
-			// Get the "clouds" and "weatherConditions" strings and 
-			// combine them. Ignore strings that are reported as "n/a":
-			string cloudy = weatherResults["clouds"];
-			if (cloudy.Equals("n/a"))
-				cloudy = "";
-			string cond = weatherResults["weatherCondition"];
-			if (cond.Equals("n/a"))
-				cond = "";
-
-			// Write the result to the conditions TextBox:
-			conditions = cloudy + " " + cond;
-
-			Android.App.AlertDialog.Builder alert = new Android.App.AlertDialog.Builder(this);
-			alert.SetTitle(location);
-			alert.SetMessage(temperature);
-		}
-
 		//define custom title text
 		protected override void OnResume()
 		{
@@ -230,6 +165,7 @@ namespace FieldInspection
 			}
 			return base.OnCreateOptionsMenu(menu);
 		}
+
 		//define action for tolbar icon press
 		public override bool OnOptionsItemSelected(IMenuItem item)
 		{

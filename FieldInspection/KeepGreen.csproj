@@ -85,7 +85,9 @@
     <Reference Include="System.Json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiUitilities.cs" />
     <Compile Include="BitmapHelpers.cs" />
+    <Compile Include="UI\DashboardActivity.cs" />
     <Compile Include="UI\MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,6 +99,9 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="packages.config" />
+    <AndroidResource Include="Resources\layout\dashboard.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

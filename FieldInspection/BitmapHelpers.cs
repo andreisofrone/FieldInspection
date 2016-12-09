@@ -1,4 +1,3 @@
-
 using Android.Graphics;
 
 namespace FieldInspection
