@@ -19,11 +19,18 @@
             android:id="@+id/myButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/openCamera" />
+            android:text="@string/openCamera"
+            android:background="@color/green" />
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Insert details" />
+            android:text="Insert inspection details"
+            android:textColor="#ff000000"
+            android:paddingTop="20dp" />
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </ScrollView>
