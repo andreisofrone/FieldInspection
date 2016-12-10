@@ -4,7 +4,7 @@ using Android.Views;
 
 namespace FieldInspection
 {
-	public class HomeFragment : Fragment
+	public class InspectionFragment : Android.Support.V4.App.Fragment
 	{
 		public override void OnCreate(Bundle savedInstanceState)
 		{
@@ -17,8 +17,8 @@ namespace FieldInspection
 		{
 			// Use this to return your custom view for this Fragment
 			// return inflater.Inflate(Resource.Layout.YourFragment, container, false);
-			View view = inflater.Inflate(Resource.Layout.homeLayout, container, false);
-			return view;//base.OnCreateView (inflater.Inflate(Resource.Layout.homeLayout, container, savedInstanceState);
+			View view = inflater.Inflate(Resource.Layout.dashboard, container, false);
+			return view;
 		}
 	}
 }
