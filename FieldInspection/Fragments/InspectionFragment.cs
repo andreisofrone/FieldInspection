@@ -34,10 +34,39 @@ namespace FieldInspection
 			return view;
 
 		}
+
+		public override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+		{
+			base.OnActivityResult(requestCode, resultCode, data);
+
+			// Make it available in the gallery
+
+			Intent mediaScanIntent = new Intent(Intent.ActionMediaScannerScanFile);
+			Uri contentUri = Uri.FromFile(App._file);
+			mediaScanIntent.SetData(contentUri);
+			Activity.SendBroadcast(mediaScanIntent);
+
+			// Display in ImageView. We will resize the bitmap to fit the display.
+			// Loading the full sized image will consume to much memory
+			// and cause the application to crash.
+
+			int height = Resources.DisplayMetrics.HeightPixels;
+			int width = _imageView.Height;
+			App.bitmap = App._file.Path.LoadAndResizeBitmap(width, height);
+			if (App.bitmap != null)
+			{
+				_imageView.SetImageBitmap(App.bitmap);
+				App.bitmap = null;
+			}
+			// Dispose of the Java side bitmap.
+			GC.Collect();
+		}
+
 		public override void OnStart()
 		{
 			base.OnStart();
 			StartInspection();
+
 		}
 
 		void StartInspection()
@@ -45,6 +74,7 @@ namespace FieldInspection
 			if (IsThereAnAppToTakePictures())
 			{
 				CreateDirectoryForPictures();
+
 				Button button =View.FindViewById<Button>(Resource.Id.myButton);
 				_imageView = View.FindViewById<ImageView>(Resource.Id.imageView1);
 				if (button != null && _imageView != null)
