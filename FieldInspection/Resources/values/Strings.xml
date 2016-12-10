@@ -6,4 +6,6 @@
   <string name="open_drawer">Open drawer</string>
   <string name="close_drawer">Close drawer</string>
   <string name="openCamera">Open Camera</string>
+  <string name="openDrawer">Drawer Open</string>
+  <string name="closeDrawer">Drawer Closed</string>
 </resources>

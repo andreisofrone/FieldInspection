@@ -16,7 +16,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -87,21 +87,22 @@
   <ItemGroup>
     <Compile Include="ApiUitilities.cs" />
     <Compile Include="BitmapHelpers.cs" />
-    <Compile Include="UI\DashboardActivity.cs" />
     <Compile Include="UI\MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\SplashActivity.cs" />
-    <Compile Include="HomeFragment.cs" />
+    <Compile Include="Fragments\InspectionFragment.cs" />
+    <Compile Include="ActionBarDrawerToggle.cs" />
+    <Compile Include="Fragments\DashboardFragment.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GettingStarted.Xamarin" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="packages.config" />
-    <AndroidResource Include="Resources\layout\dashboard.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
+    <AndroidResource Include="Resources\anim\slide_in.xml" />
+    <AndroidResource Include="Resources\anim\slide_out.xml" />
+    <AndroidResource Include="Resources\layout\dashboardLayout.axml" />
+    <AndroidResource Include="Resources\layout\inspectionLayout.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -118,9 +119,6 @@
     <AndroidResource Include="Resources\drawable\imgBg.png" />
     <AndroidResource Include="Resources\layout\app_bar.axml" />
     <AndroidResource Include="Resources\layout\headerdrawerlayout.axml" />
-    <AndroidResource Include="Resources\layout\homeLayout.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable\GreenSplash.png" />
   </ItemGroup>
   <ItemGroup>
@@ -153,6 +151,10 @@
       <Version>7.0.1</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Fragments\" />
+    <Folder Include="Resources\anim\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
