@@ -32,10 +32,6 @@ namespace FieldInspection
 	{
 		DrawerLayout drawerLayout;
         private ImageView _imageView;
-		private Fragment currentFragment;
-		private DashboardFragment dashoardFragment;
-		private InspectionFragment inspectionFragment;
-		private Stack<Fragment> stackFragments;
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
@@ -69,22 +65,6 @@ namespace FieldInspection
 			SetContentView(Resource.Layout.Main);	
 			base.OnCreate(savedInstanceState);
 
-			//dashoardFragment = new HomeFragment();
-			////inspectionFragment = new InspectionFragment();
-			//stackFragments = new Stack<Fragment>();
-
-
-
-			//var trans = FragmentManager.BeginTransaction();
-			//trans.Add(Resource.Id.HomeFrameLayout, dashoardFragment, "Dashoard Fragment");
-			//trans.Hide(dashoardFragment);
-
-			//trans.Add(Resource.Id.HomeFrameLayout, inspectionFragment, "Inspection Fragment");
-			//trans.Commit();
-
-
-
-
 			drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
 
 			// Init toolbar
@@ -93,8 +73,6 @@ namespace FieldInspection
 			SupportActionBar.SetTitle(Resource.String.app_name);
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 			SupportActionBar.SetDisplayShowHomeEnabled(true);
-
-
 		
 			// Create ActionBarDrawerToggle button and add it to the toolbar
 			var drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.open_drawer, Resource.String.close_drawer);
@@ -113,58 +91,40 @@ namespace FieldInspection
 			ft.Add(Resource.Id.HomeFrameLayout, new DashboardFragment());
 			ft.Commit();
 			//currentFragment = dashoardFragment;
-
-    //        if (IsThereAnAppToTakePictures())
-    //        {
-    //            CreateDirectoryForPictures();
-
-    //            Button button = FindViewById<Button>(Resource.Id.myButton);
-    //            _imageView = FindViewById<ImageView>(Resource.Id.imageView1);
-				//if (button != null)
-				//{
-
-				//	button.Click += TakeAPicture;
-				//}
-    //        }
+			StartInspection();
+          
 			var navigationView = FindViewById<NavigationView>(Resource.Id.nav_view);
 			navigationView.NavigationItemSelected += NavigationView_NavigationItemSelected;
 			// Attach item selected handler to navigation view
+			StartInspection();
 
         }
 
 
-		//private void ShowFragment(Fragment fragment)
-		//{
-		//	if (fragment.IsVisible)
-		//	{
-		//		return;
-		//	}
+		void StartInspection()
+		{
+			if (IsThereAnAppToTakePictures())
+			{
+				CreateDirectoryForPictures();
+				Button button = FindViewById<Button>(Resource.Id.myButton);
+				_imageView = FindViewById<ImageView>(Resource.Id.imageView1);
+				if (button != null && _imageView != null)
+				{
 
-		//	var trans = FragmentManager.BeginTransaction();
-		//	//var a= supportf
-		//	trans.SetCustomAnimations(Resource.Animation.slide_in, Resource.Animation.slide_out, Resource.Animation.slide_in, Resource.Animation.slide_out);
-
-		//	fragment.View.BringToFront();
-		//	currentFragment.View.BringToFront();
-
-		//	trans.Hide(currentFragment);
-		//	trans.Show(fragment);
-
-		//	trans.AddToBackStack(null);
-		//	stackFragments.Push(currentFragment);
-		//	trans.Commit();
-
-		//	currentFragment = fragment;
-		//}
+					button.Click += TakeAPicture;
+				}
+			}
+		}
 
 
-        private void TakeAPicture(object sender, EventArgs eventArgs)
+		private void TakeAPicture(object sender, EventArgs eventArgs)
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
             App._file = new File(App._dir, String.Format("myPhoto_{0}.jpg", Guid.NewGuid()));
             intent.PutExtra(MediaStore.ExtraOutput, Uri.FromFile(App._file));
             StartActivityForResult(intent, 0);
         }
+
 
         private void CreateDirectoryForPictures()
         {
@@ -177,6 +137,7 @@ namespace FieldInspection
             }
         }
 
+
         private bool IsThereAnAppToTakePictures()
         {
             Intent intent = new Intent(MediaStore.ActionImageCapture);
@@ -185,12 +146,15 @@ namespace FieldInspection
             return availableActivities != null && availableActivities.Count > 0;
         }
 
+
 		//define custom title text
 		protected override void OnResume()
 		{
 			SupportActionBar.SetTitle(Resource.String.app_name);
 			base.OnResume();
 		}
+
+
 		//define action for navigation menu selection
 		void NavigationView_NavigationItemSelected(object sender, NavigationView.NavigationItemSelectedEventArgs e)
 		{
@@ -200,47 +164,28 @@ namespace FieldInspection
 					
 					var ft = FragmentManager.BeginTransaction();
 					var home = new DashboardFragment();
-					var insp = new InspectionFragment();
-
-					//insp.View.BringToFront();
-					//home.View.BringToFront();
-
-					//ft.Hide(insp);
-					//ft.Show(home);
-
 					ft.AddToBackStack(null);
-					ft.Add(Resource.Id.HomeFrameLayout, home);
-
+					ft.Replace(Resource.Id.HomeFrameLayout, home);
 					ft.Commit();
-
 					break;
 					
 				case (Resource.Id.nav_inspection):
 					
 					var ftt = FragmentManager.BeginTransaction();
-					var homee = new DashboardFragment();
 					var inspp = new InspectionFragment();
 
-					//insp.View.BringToFront();
-					//home.View.BringToFront();
-
-					//ftt.Hide(homee);
-					//ftt.Show(inspp);
-
 					ftt.AddToBackStack(null);
-					ftt.Add(Resource.Id.HomeFrameLayout, inspp);
-
+					ftt.Replace(Resource.Id.HomeFrameLayout, inspp);
 					ftt.Commit();
+					StartInspection();
+					break;
 
-						break;
-
-					//case (Resource.Id.nav_friends):
-					//	// React on 'Friends' selection
-					//	break;
 			}
 			// Close drawer
 			drawerLayout.CloseDrawers();
+
 		}
+
 
 		//add custom icon to tolbar
 		public override bool OnCreateOptionsMenu(Android.Views.IMenu menu)
@@ -253,6 +198,7 @@ namespace FieldInspection
 			}
 			return base.OnCreateOptionsMenu(menu);
 		}
+
 
 		//define action for tolbar icon press
 		public override bool OnOptionsItemSelected(IMenuItem item)
@@ -269,6 +215,8 @@ namespace FieldInspection
 					return base.OnOptionsItemSelected(item);
 			}
 		}
+
+
 		//to avoid direct app exit on backpreesed and to show fragment from stack
 		public override void OnBackPressed()
 		{
