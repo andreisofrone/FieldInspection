@@ -5,9 +5,7 @@ using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
 using Android.Views;
-using Android.Widget;
 using Java.IO;
-
 
 namespace FieldInspection
 {
@@ -17,13 +15,12 @@ namespace FieldInspection
 		public static File _dir;
 		public static Bitmap bitmap;
 	}
+
 	[Activity(Label = "FieldInspection", Theme = "@style/MyTheme.Base", Icon = "@drawable/icon")]
 
 	public class MainActivity : AppCompatActivity
 	{
 		DrawerLayout drawerLayout;
-		private ImageView _imageView;
-
 		protected override void OnCreate(Bundle savedInstanceState)
 		{
 			SetContentView(Resource.Layout.Main);
@@ -41,10 +38,10 @@ namespace FieldInspection
 			// Create ActionBarDrawerToggle button and add it to the toolbar
 			var drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, Resource.String.open_drawer, Resource.String.close_drawer);
 
-			//if (drawerToggle != null)
-			//{
-			//	drawerLayout.SetDrawerListener(drawerToggle);
-			//}
+			if (drawerToggle != null)
+			{
+				drawerLayout.SetDrawerListener(drawerToggle);
+			}
 
 			drawerToggle.SyncState();
 
@@ -60,7 +57,6 @@ namespace FieldInspection
 			// Attach item selected handler to navigation view
 
 		}
-
 
 		//define custom title text
 		protected override void OnResume()
@@ -92,7 +88,6 @@ namespace FieldInspection
 					ftt.AddToBackStack(null);
 					ftt.Replace(Resource.Id.HomeFrameLayout, inspp);
 					ftt.Commit();
-					//StartInspection();
 					break;
 			}
 			// Close drawer
