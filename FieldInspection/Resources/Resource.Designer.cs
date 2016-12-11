@@ -1312,9 +1312,6 @@ namespace FieldInspection
 			// aapt resource value: 0x7f080046
 			public const int my_purple = 2131230790;
 			
-			// aapt resource value: 0x7f080049
-			public const int my_white = 2131230793;
-			
 			// aapt resource value: 0x7f08004c
 			public const int primary = 2131230796;
 			
@@ -1380,6 +1377,9 @@ namespace FieldInspection
 			
 			// aapt resource value: 0x7f080043
 			public const int switch_thumb_normal_material_light = 2131230787;
+			
+			// aapt resource value: 0x7f080049
+			public const int white = 2131230793;
 			
 			// aapt resource value: 0x7f08004f
 			public const int window_background = 2131230799;
