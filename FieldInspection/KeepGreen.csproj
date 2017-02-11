@@ -99,6 +99,7 @@
     <Compile Include="UI\SplashActivity.cs" />
     <Compile Include="Fragments\InspectionFragment.cs" />
     <Compile Include="Fragments\DashboardFragment.cs" />
+    <Compile Include="UI\LoginActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -108,6 +109,8 @@
     <AndroidResource Include="Resources\anim\slide_out.xml" />
     <AndroidResource Include="Resources\layout\dashboardLayout.axml" />
     <AndroidResource Include="Resources\layout\inspectionLayout.axml" />
+    <AndroidResource Include="Resources\layout\LoginLayout.axml" />
+    <AndroidResource Include="Resources\layout\SplashLayout.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

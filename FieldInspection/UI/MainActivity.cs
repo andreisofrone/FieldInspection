@@ -16,7 +16,7 @@ namespace FieldInspection
 		public static Bitmap bitmap;
 	}
 
-	[Activity(Label = "FieldInspection", Theme = "@style/MyTheme.Base", Icon = "@drawable/icon")]
+	[Activity(Label = "FieldInspection", Theme = "@style/MyTheme.Base")]
 
 	public class MainActivity : AppCompatActivity
 	{
