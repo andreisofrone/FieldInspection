@@ -57,8 +57,8 @@ namespace FieldInspection
 			string[] colorss = new string[] { "#33CC00", "#FF3300" };
 			int totall = 0;
 
-			plotViewModelKm = View.FindViewById<PlotView>(Resource.Id.plotViewModel2);
-			LayoutModelKm = View.FindViewById<LinearLayout>(Resource.Id.linearLayoutModel);
+			//plotViewModelKm = View.FindViewById<PlotView>(Resource.Id.plotViewModel2);
+			//LayoutModelKm = View.FindViewById<LinearLayout>(Resource.Id.linearLayoutModel);
 
 			//Model Allocation Pie char
 			var plotModel22 = new PlotModel();

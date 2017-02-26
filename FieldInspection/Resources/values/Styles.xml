@@ -5,6 +5,7 @@
     <item name="android:windowBackground">@color/green</item>
     <item name="android:colorPrimary">@color/my_blue</item>
     <item name="android:windowNoTitle">true</item>
+	<item name="colorAccent">@color/white</item>
   </style>
  	<style name="MyTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
 	    <item name="windowNoTitle">true</item>
